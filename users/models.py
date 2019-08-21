@@ -10,7 +10,7 @@ class UserProfile(models.Model):
 	# email = models.CharField(max_length=64, blank=True, null=True)// User email
 	short_number = models.CharField(max_length=32,blank=True, null=True)
 	phone_number = models.CharField(max_length=64, blank=True, null=True)
-	avatar = models.FileField(upload_to='avatar/%Y/%m/%d/')
+	avatar = models.ImageField(upload_to='avatar')
 	site = models.ForeignKey("Site", on_delete=models.CASCADE, blank=True, null=True)
 
 	class Meta:

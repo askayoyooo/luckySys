@@ -97,7 +97,7 @@ class ProfileForm(forms.Form):
 	site_id = forms.fields.IntegerField(widget=widgets.Select(choices=models.Site.objects.values_list('id', 'name'),))
 	# site_id = forms.fields.MultipleChoiceField(widget=widgets.Select(attrs={'class': 'form-control'}, models.Site.objects.all()))
 
-	avatar = forms.FileField(label='Avatar', required=False)
+	avatar = forms.ImageField(label='Avatar', required=False)
 
 
 # def __init__(self, *args, **kwargs):
