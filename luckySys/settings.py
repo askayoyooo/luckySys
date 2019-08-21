@@ -123,5 +123,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
-MEDIA_ROOT=os.path.join(BASE_DIR, "luckySys", "media")  #blog是项目名，media是约定成俗的文件夹名
-MEDIA_URL="/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'upload/')
+
+MEDIA_URL = '/upload/'

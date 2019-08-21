@@ -12,7 +12,8 @@
     <li>Short Number: {{ user.profile.short_number }} </li>
     <li>Telephone: {{ user.profile.phone_number }} </li>
     <li>Site: {{ user.profile.site }} </li>
-    <li>Avatar: {{ user.profile.avatar }} </li>
+    <li>Avatar: {{ user.profile.avatar }}     <img src="{{ MEDIA_ROOT }}{{ user.profile.avatar }}" alt="">
+</li>
 </ul>
 
 {% if user.is_authenticated %}
