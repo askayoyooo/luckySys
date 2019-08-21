@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>用户名:<input type="text" name="username"></div>
+    <div>工号:<input type="text" name="job_number"></div>
+    <div>邮箱:<input type="text" name="email"></div>
+    <div>座机:<input type="text" name="short_number"></div>
+    <div>手机:<input type="text" name="phone_number"></div>
+    <div>Site:
+        <select name="site" >
+            {% for site in sites %}
+                <option value="{{ site.pk }}">{{ site.name }}</option>
+
+            {% endfor %}
+        </select>
+    </div>
+    <div>头像<input type="file" name="avatar"></div>
+    <input type="submit" value="提交">
+</form>
+
+</body>
+</html>
