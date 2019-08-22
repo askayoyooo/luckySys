@@ -15,22 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from users import views
+from luck import views
 
 
-
-
-app_name = 'users'
-
+app_name = 'luck'
 urlpatterns = [
     path('', views.index, name='index'),
+    path('luckymember', views.lucky_member,name='lucky_member')
     # path('profile/', views.profile, name='profile'),
 
-    path('register/', views.register, name='register'),
-    path('login/', views.login, name='login',),
-    path('logout/', views.logout, name='logout'),
-    path('user/<int:user_id>/profile/', views.profile, name='profile'),
-    path('user/<int:user_id>/profile/update/', views.profile_update, name='profile_update'),
-    path('user/<int:user_id>/pwdchange/', views.pwd_change, name='pwd_change'),
+    # path('register/', views.register, name='register'),
+    # path('login/', views.login, name='login',),
+    # path('logout/', views.logout, name='logout'),
+    # path('user/<int:user_id>/profile/', views.profile, name='profile'),
+    # path('user/<int:user_id>/profile/update/', views.profile_update, name='profile_update'),
+    # path('user/<int:user_id>/pwdchange/', views.pwd_change, name='pwd_change'),
 
 ]

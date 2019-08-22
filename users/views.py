@@ -5,14 +5,14 @@ from django.contrib import auth
 from .forms import RegistrationForm, LoginForm, ProfileForm, PwdChangeForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required,permission_required
 
 
 # Create your views here.
 
 
 def index(request):
-	return HttpResponse('首页')
+	return HttpResponse('用戶首页')
 
 
 @login_required
@@ -24,6 +24,9 @@ def logout(request):
 @login_required
 def pwd_change(request, user_id):
 	user = get_object_or_404(User, pk=user_id)
+	user_logined = request.user
+	if user != user_logined:
+		return HttpResponse('You have no permission on this page')
 
 	if request.method == "POST":
 		form = PwdChangeForm(request.POST)
@@ -49,28 +52,14 @@ def pwd_change(request, user_id):
 	return render(request, 'users/pwd_change.html', {'form': form, 'user': user})
 
 
-def profile(request, user_id):
-	user = get_object_or_404(User, pk=user_id)
-	return render(request, 'users/profile.html', {'user': user})
 
-# def profile(request,user_id):
-# 	if request.method == 'POST':
-# 		username = request.POST.get('username')
-# 		job_number = request.POST.get('job_number')
-# 		email = request.POST.get('email')
-# 		short_number = request.POST.get('short_number')
-# 		phone_number = request.POST.get('phone_number')
-# 		site_id = request.POST.get('site')
-# 		avatar = request.FILES.get('avatar')
-# 		UserProfile.objects.create(username=username, job_number=job_number, email=email, short_number=short_number,	phone_number=phone_number, site=Site.objects.get(id=site_id), avatar=avatar,)
-# 		return HttpResponse('ok')
-# 	sites = Site.objects.all()
-# 	return render(request, 'luck/profile.html',{'sites':sites})
-
-
+@login_required
 def profile_update(request, user_id):
 	user = get_object_or_404(User, pk=user_id)
 	user_profile = get_object_or_404(UserProfile, user=user)
+	user_logined = request.user
+	if user != user_logined:
+		return HttpResponse('You have no permission on this page')
 	if request.method == "POST":
 		form = ProfileForm(request.POST, request.FILES)
 
@@ -91,6 +80,15 @@ def profile_update(request, user_id):
 		form = ProfileForm(default_data)
 
 	return render(request, 'users/profile_update.html', {'form': form, 'user': user})
+
+
+@login_required
+def profile(request, user_id):
+	user = get_object_or_404(User, pk=user_id)
+	user_logined = request.user
+	if user != user_logined:
+		return HttpResponse('You have no permission on this page')
+	return render(request, 'users/profile.html', {'user': user})
 
 
 def register(request):
