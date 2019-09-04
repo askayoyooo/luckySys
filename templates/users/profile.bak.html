@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+{% block content %}
+    <div class="form-wrapper container col-md-6 col-md-offset-3" style="margin-top: 1%; background-color: #ffffff;border-radius:5px;min-height:700px; min-width: 900px">
+    <div class="form-wrapper container col-md-8  " style="margin-top: 1%; background-color: #ffffff;border-radius:5px;">
+<h3>Account Info</h3>
+<ul>
+    <li> <div class="row">  <div class="col-md-3 col-md-offset-1"><strong>Username:</strong></div> <div class="col-md-offset-1"> {{ user.username }}</div> </div></li>
+    <li> <div class="row">  <div class="col-md-3 col-md-offset-1"><strong>Email:</strong></div> <div class="col-md-offset-1"> {{ user.email }}</div> </div></li>
+</ul>
+<h3>My Profile</h3>
+<ul>
+    <li> <div class="row">  <div class="col-md-3 col-md-offset-1"><strong>FirstName:</strong></div> <div class="col-md-offset-1"> {{ user.first_name }}</div> </div></li>
+    <li> <div class="row">  <div class="col-md-3 col-md-offset-1"><strong>LastName:</strong></div> <div class="col-md-offset-1"> {{ user.last_name }}</div> </div></li>
+    <li> <div class="row">  <div class="col-md-3 col-md-offset-1"><strong>ShortNumber:</strong></div> <div class="col-md-offset-1"> {{ user.profile.short_number }}</div> </div></li>
+    <li> <div class="row">  <div class="col-md-3 col-md-offset-1"><strong>Telephone:</strong></div> <div class="col-md-offset-1"> {{ user.profile.phone_number }}</div> </div></li>
+    <li> <div class="row">  <div class="col-md-3 col-md-offset-1"><strong>Site:</strong></div> <div class="col-md-offset-1"> {{ user.profile.site }}</div> </div></li>
+
+
+</ul>
+
+
+    </div>
+{#        <div class="col-md-offset-10 clearfix" style="margin-top: 2%">  <img src="/media/{{ user.profile.avatar }}" class="img-thumbnail" style="width: 140px; height: 140px;" alt="Avatar"><strong>Avatar</strong></div>#}
+{#    <div class="col-md-offset-8 clearfix" style="margin-bottom: 2%">#}
+{#    {% if user.is_authenticated %}#}
+{#    <a href="{% url 'users:profile_update' user.id %}">Edit Profile</a>#}
+{#| <a href="{% url 'users:pwd_change' user.id %}">Change Password </a>#}
+{#| <a href="{% url 'users:logout' %}">Logout</a>#}
+{#{% endif %}#}
+{#</div>#}
+    </div>
+    <script>
+    $('.col-md-3').addClass('text-right')
+    $('.row').css('min-width','540px')
+    </script>
+{% endblock %}

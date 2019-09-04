@@ -53,8 +53,38 @@ def pwd_change(request, user_id):
 
 
 
+# @login_required
+# def profile_update(request, user_id):
+# 	user = get_object_or_404(User, pk=user_id)
+# 	user_profile = get_object_or_404(UserProfile, user=user)
+# 	user_logined = request.user
+# 	if user != user_logined:
+# 		return HttpResponse('You have no permission on this page')
+# 	if request.method == "POST":
+# 		form = ProfileForm(request.POST, request.FILES)
+# 		print("post is on")
+#
+# 		if form.is_valid():
+# 			user.first_name = form.cleaned_data['first_name']
+# 			# user.last_name = form.cleaned_data['last_name']
+# 			user.save()
+#
+# 			user_profile.short_number = form.cleaned_data['short_number']
+# 			user_profile.phone_number = form.cleaned_data['phone_number']
+# 			user_profile.avatar = form.cleaned_data['avatar']
+# 			user_profile.site = Site.objects.get(id=form.cleaned_data['site_id'])
+# 			user_profile.save()
+#
+# 			return HttpResponseRedirect(reverse('users:profile', kwargs={'user_id': user.id}))
+# 	else:
+# 		default_data = {'first_name': user.first_name, 'last_name': user.last_name,'short_number': user_profile.short_number, 'phone_number': user_profile.phone_number, }
+# 		form = ProfileForm(default_data)
+#
+# 	return render(request, 'users/profile_update.html', {'form': form, 'user': user})
+
+
 @login_required
-def profile_update(request, user_id):
+def profile(request, user_id):
 	user = get_object_or_404(User, pk=user_id)
 	user_profile = get_object_or_404(UserProfile, user=user)
 	user_logined = request.user
@@ -62,33 +92,29 @@ def profile_update(request, user_id):
 		return HttpResponse('You have no permission on this page')
 	if request.method == "POST":
 		form = ProfileForm(request.POST, request.FILES)
-
 		if form.is_valid():
 			user.first_name = form.cleaned_data['first_name']
-			user.last_name = form.cleaned_data['last_name']
+			# user.last_name = form.cleaned_data['last_name']
 			user.save()
 
 			user_profile.short_number = form.cleaned_data['short_number']
 			user_profile.phone_number = form.cleaned_data['phone_number']
-			user_profile.avatar = form.cleaned_data['avatar']
+			user_profile.experience = form.cleaned_data['experience']
+			user_profile.job = form.cleaned_data['job']
+			user_profile.skill = form.cleaned_data['skill']
+			user_profile.education = form.cleaned_data['education']
+			if form.cleaned_data['avatar'] is not None:
+				user_profile.avatar = form.cleaned_data['avatar']
+			else:
+				print("User dose not upload avatar")
 			user_profile.site = Site.objects.get(id=form.cleaned_data['site_id'])
 			user_profile.save()
 
 			return HttpResponseRedirect(reverse('users:profile', kwargs={'user_id': user.id}))
 	else:
-		default_data = {'first_name': user.first_name, 'last_name': user.last_name,'short_number': user_profile.short_number, 'phone_number': user_profile.phone_number, }
+		default_data = {'first_name': user.first_name, 'last_name': user.last_name,'short_number': user_profile.short_number, 'phone_number': user_profile.phone_number,'experience':user_profile.experience, 'education':user_profile.education,'skill':user_profile.skill,'job':user_profile.job }
 		form = ProfileForm(default_data)
-
-	return render(request, 'users/profile_update.html', {'form': form, 'user': user})
-
-
-@login_required
-def profile(request, user_id):
-	user = get_object_or_404(User, pk=user_id)
-	user_logined = request.user
-	if user != user_logined:
-		return HttpResponse('You have no permission on this page')
-	return render(request, 'users/profile.html', {'user': user})
+	return render(request, 'users/profile.html', {'form': form, 'user': user})
 
 
 def register(request):

@@ -93,16 +93,12 @@ class ProfileForm(forms.Form):
 	last_name = forms.CharField(label='Last Name', max_length=50, required=False)
 	short_number = forms.CharField(label='Short Number', max_length=50, required=False)
 	phone_number = forms.CharField(label='Phone Number', max_length=50, required=False)
-	# site = forms.(label='Site', max_length=50, required=False)
+	experience = forms.CharField(widget=forms.Textarea, label='Experience', max_length=500, required=False)
+	skill = forms.CharField(label='Skill',max_length=200, required=False)
+	education = forms.CharField(label='Education',max_length=128, required=False)
+	job = forms.CharField(label="Job", max_length=64, required=False)
 	site_id = forms.fields.IntegerField(widget=widgets.Select(choices=models.Site.objects.values_list('id', 'name'),))
-	# site_id = forms.fields.MultipleChoiceField(widget=widgets.Select(attrs={'class': 'form-control'}, models.Site.objects.all()))
-
 	avatar = forms.ImageField(label='Avatar', required=False)
-
-
-# def __init__(self, *args, **kwargs):
-# 	super(ProfileForm, self).__init__(*args, **kwargs)
-# 	self.fields["site_id"].widget.choices = models.Site.objects.all()
 
 
 class PwdChangeForm(forms.Form):

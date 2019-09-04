@@ -1,8 +1,11 @@
+{% extends 'index.html' %}
 {% block content %}
+    <div class="form-wrapper container col-md-6 col-md-offset-3" style="margin-top: 1%; background-color: #ffffff;border-radius:5px;min-height:700px">
+    <div class="form-wrapper container col-md-8  " style="margin-top: 1%; background-color: #ffffff;border-radius:5px;">
 <h2>Account Info</h2>
 <ul>
-    <li>Username: {{ user.username }} </li>
-    <li>Email: {{ user.email }} </li>
+    <li> <div class="row">  <div class="col-md-3 col-md-offset-1"><strong>Username:</strong></div> <div class="col-md-offset-1"> {{ user.username }}</div> </div></li>
+    <li> <div class="row">  <div class="col-md-3 col-md-offset-1"><strong>Email:</strong></div> <div class="col-md-offset-1"> {{ user.email }}</div> </div></li>
 
 </ul>
 <h2>Update My Profile</h2>
@@ -27,5 +30,9 @@
 
 <a href="{% url 'users:logout' %}">Logout</a> |
 <a href="{% url 'users:pwd_change' user.id %}">Password change</a>
-
+    </div>
+    </div>
+    <script>
+    $('.col-md-3').addClass('text-right')
+    </script>
 {% endblock %}

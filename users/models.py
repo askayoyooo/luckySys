@@ -10,6 +10,10 @@ class UserProfile(models.Model):
 	# email = models.CharField(max_length=64, blank=True, null=True)// User email
 	short_number = models.CharField(max_length=32,blank=True, null=True)
 	phone_number = models.CharField(max_length=64, blank=True, null=True)
+	experience = models.TextField(max_length=500, blank=True, null=True)
+	skill = models.CharField(max_length=200, blank=True, null=True)
+	education = models.CharField(max_length=128, blank=True, null=True)
+	job = models.CharField(max_length=64, blank=True, null=True)
 	avatar = models.ImageField(upload_to='avatar')
 	site = models.ForeignKey("Site", on_delete=models.CASCADE, blank=True, null=True)
 
