@@ -119,11 +119,10 @@ def profile(request, user_id):
 
 def register(request):
 	if request.method == 'POST':
-
 		form = RegistrationForm(request.POST)
 		if form.is_valid():
 			username = form.cleaned_data['username']
-			email = form.cleaned_data['email']
+			email = form.cleaned_data['email'].lower()
 			password = form.cleaned_data['password2']
 
 			# 使用内置User自带create_user方法创建用户，不需要使用save()
@@ -137,6 +136,7 @@ def register(request):
 
 	else:
 		form = RegistrationForm()
+	print('aaa')
 
 	return render(request, 'users/registration.html', {'form': form})
 
@@ -147,16 +147,16 @@ def login(request):
 		if form.is_valid():
 			username = form.cleaned_data['username']
 			password = form.cleaned_data['password']
-
 			user = auth.authenticate(username=username, password=password)
-
 			if user is not None and user.is_active:
 				auth.login(request, user)
 				return HttpResponseRedirect(reverse('users:profile', kwargs={'user_id': user.id}))
 
 			else:
 				# 登陆失败
-				return render(request, 'users/login.html', {'form': form, 'message': 'Wrong password. Please try again.'})
+				return render(request, 'users/login.html', {'form': form, 'message': 'Your account is not active, please contact with tim zhong.'})
+		else:
+			return render(request, 'users/login.html', {'form': form, 'message': 'Wrong userID or password. Please try again.'})
 	else:
 		form = LoginForm()
 	return render(request, 'users/login.html', {'form': form})

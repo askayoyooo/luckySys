@@ -14,7 +14,7 @@ class UserProfile(models.Model):
 	skill = models.CharField(max_length=200, blank=True, null=True)
 	education = models.CharField(max_length=128, blank=True, null=True)
 	job = models.CharField(max_length=64, blank=True, null=True)
-	avatar = models.ImageField(upload_to='avatar')
+	avatar = models.ImageField(upload_to='avatar', default="avatar/default_qz.jpg")
 	site = models.ForeignKey("Site", on_delete=models.CASCADE, blank=True, null=True)
 
 	class Meta:
@@ -30,3 +30,13 @@ class Site(models.Model):
 	def __str__(self):
 		return self.name
 
+
+class Activity(models.Model):
+	name = models.CharField(max_length=200, null=False, blank=False)
+	content = models.CharField(max_length=500, null=False, blank=False)
+	creator = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+	time = models.DateField(blank=True, null=True)
+	update_time = models.DateTimeField(auto_now_add=True, blank=True)
+
+	def __str__(self):
+		return self.name

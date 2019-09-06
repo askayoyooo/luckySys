@@ -229,106 +229,19 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Profile</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">User Profile</li>
-                        </ol>
-                    </div>
-                </div>
-            </div><!-- /.container-fluid -->
+
         </section>
 
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-3">
-
-                        <!-- Profile Image -->
-                        <div class="card card-primary card-outline">
-                            <div class="card-body box-profile">
-                                <div class="text-center">
-                                    <img class="profile-user-img img-fluid img-circle"
-                                         src="/media/{{ user.profile.avatar }}" alt="User profile picture">
-
-                                </div>
-
-                                <h3 class="profile-username text-center">{{ user.first_name }}</h3>
-
-                                <p class="text-muted text-center">{{ user.profile.job }}</p>
-
-                                <ul class="list-group list-group-unbordered mb-3">
-                                    <li class="list-group-item">
-                                        <b>Followers</b> <a class="float-right">0</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <b>Following</b> <a class="float-right">0</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <b>Friends</b> <a class="float-right">0</a>
-                                    </li>
-                                </ul>
-
-                                <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <!-- /.card -->
-
-                        <!-- About Me Box -->
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h3 class="card-title">About Me</h3>
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body">
-                                <strong><i class="fas fa-book mr-1"></i> Education</strong>
-
-                                <p class="text-muted">
-                                    {{ user.profile.education }}
-                                </p>
-
-                                <hr>
-
-                                <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
-
-                                <p class="text-muted">{{ user.profile.site }}</p>
-
-                                <hr>
-
-                                <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
-
-                                <p class="text-muted">{{ user.profile.skill }}</p>
-
-                                <hr>
-
-                                <strong><i class="far fa-file-alt mr-1"></i> Experience</strong>
-
-                                <p class="text-muted">{{ user.profile.experience }}</p>
-
-                                <hr>
-                                <strong><i class="fa fa-envelope"></i> E-mail</strong>
-                                <p class="text-muted">{{ user.email }}</p>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <!-- /.card -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-md-9">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-header p-2">
                                 <ul class="nav nav-pills">
-                                    <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Timeline</a>
+                                    <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Activities</a>
                                     </li>
-                                    <li class="nav-item"><a class="nav-link" href="#settings"
-                                                            data-toggle="tab">Settings</a></li>
                                 </ul>
                             </div><!-- /.card-header -->
                             <div class="card-body">
@@ -336,12 +249,45 @@
                                     <div class="active tab-pane" id="timeline">
                                         <!-- The timeline -->
                                         <div class="timeline timeline-inverse">
+                                            {% for activity in activities %}
+                                                <div class="time-label">
+                                                <span class="bg-danger">
+                                                  {{ activity.time }}
+                                                </span>
+                                                </div>
+                                                <!-- timeline item -->
+                                                <div>
+                                                    <i class="fas fa-bookmark bg-primary"></i>
+
+                                                    <div class="timeline-item">
+                                                        <span class="time"><i class="far fa-clock"></i> 12:05</span>
+
+                                                        <h3 class="timeline-header"><a href="#">Support Team</a> sent
+                                                            you an
+                                                            email</h3>
+
+                                                        <div class="timeline-body">
+                                                            Etsy doostang zoodles disqus groupon greplin oooj voxy
+                                                            zoodles,
+                                                            weebly ning heekya handango imeem plugg dopplr jibjab,
+                                                            movity
+                                                            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo
+                                                            kaboodle
+                                                            quora plaxo ideeli hulu weebly balihoo...
+                                                        </div>
+                                                        <div class="timeline-footer">
+                                                            <a href="#" class="btn btn-primary btn-sm">Read more</a>
+                                                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+
+
+
+
+
                                             <!-- timeline time label -->
-                                            <div class="time-label">
-                        <span class="bg-danger">
-                          12 Feb. 2015
-                        </span>
-                                            </div>
                                             <div class="time-label">
                         <span class="bg-danger">
                           10 Feb. 2014
@@ -439,121 +385,6 @@
                                         </div>
                                     </div>
                                     <!-- /.tab-pane -->
-
-                                    <div class="tab-pane" id="settings">
-                                        <form class="form-horizontal" method="post" action=""
-                                              enctype="multipart/form-data">
-                                            {% csrf_token %}
-                                            <div class="form-group">
-                                                <label for="inputFirstName" class="col-sm-2 control-label">Name</label>
-
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="inputFirstName"
-                                                           name="first_name" value="{{ user.first_name }}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="importShortNumber" class="col-sm-2 control-label">Short
-                                                    Number</label>
-
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="importShortNumber"
-                                                           name="short_number" value="{{ user.profile.short_number }}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputPhoneNumber" class="col-sm-2 control-label">Phone
-                                                    Number</label>
-
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="inputPhoneNumber"
-                                                           name="phone_number" value="{{ user.profile.phone_number }}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="importJob" class="col-sm-2 control-label">Job</label>
-
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="importJob" name="job"
-                                                           value="{{ user.profile.job }}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-
-                                                <div class="col-sm-10">
-                                                    <input type="email" class="form-control" id="inputEmail"
-                                                           name="email" value="{{ user.email }}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="importEducation"
-                                                       class="col-sm-2 control-label">Education</label>
-
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="importEducation"
-                                                           name="education" value="{{ user.profile.education }}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="importSkill" class="col-sm-2 control-label">Skill</label>
-
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="importSkill"
-                                                           name="skill" value="{{ user.profile.skill }}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="id_site_id" class="col-sm-2 control-label">Site</label>
-
-                                                <div class="col-sm-10">
-                                                    <select name="site_id" id="id_site_id">
-
-                                                        <option id=1 value="1">WZS</option>
-
-                                                        <option id=2 value="2">WKS</option>
-
-                                                        <option id=3 value="3">WCD</option>
-
-                                                        <option id=4 value="4">WCQ</option>
-
-                                                        <option id=5 value="5">WHQ</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputExperience"
-                                                       class="col-sm-2 control-label">Experience</label>
-
-                                                <div class="col-sm-10">
-                                                    <textarea class="form-control" id="inputExperience"
-                                                              name="experience">{{ user.profile.experience }}</textarea>
-                                                </div>
-                                            </div>
-
-
-<div class="form-group">
-    <label for="inputAvatar" class="col-sm-2 control-label">Avatar</label>
-    <p class="text-muted col-sm-4">Please click to change avatar.</p>
-	<div style="position: relative;border: 5px solid lightblue;width: 150px;height:150px;border-radius: 50%; margin: 20px;" >
-		<img src="/media/{{ user.profile.avatar }}"  id="avatar_img"
-			 style="width: 140px;height: 140px;left:0;top: 0;border-radius: 50%;"/>
-		<input type="file"  name="avatar" id="id_avatar"
-			   accept="image/jpeg,image/png"
-			   style="width: 100%;height:100%;opacity: 0;position: absolute;left:0;top: 0;"/>
-	</div>
-	<br/>
-</div>
-
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" class="btn btn-danger">Submit</button>
-                                                </div>
-                                            </div>
-
-                                        </form>
-
-                                    </div>
                                     <!-- /.tab-pane -->
                                 </div>
                                 <!-- /.tab-content -->
@@ -581,7 +412,7 @@
     <!--
     <aside class="control-sidebar control-sidebar-dark">
     -->
-        <!-- Control sidebar content goes here -->
+    <!-- Control sidebar content goes here -->
     <!-- </aside> -->
 
     <!-- /.control-sidebar -->
