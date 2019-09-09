@@ -7,5 +7,5 @@ def index(request):
 
 	activities = models.Activity.objects.all()
 	if request.method == "GET":
-
+		print(activities)
 		return render(request, 'activities/index.html',{'activities': activities})
