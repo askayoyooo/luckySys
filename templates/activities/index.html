@@ -53,7 +53,8 @@
                                                     <div class="timeline-item">
                                                         <span class="time"><i class="far fa-clock"></i> {{ activity.update_time }}</span>
 
-                                                        <h3 class="timeline-header"><a href="#">{{ activity.creator.first_name }}</a> create--<strong>{{ activity.name }}</strong></h3>
+                                                        <h3 class="timeline-header"><a href="#">{{ activity.creator.first_name }}</a> create--
+                                                            <a href="/activities/activity/{{ activity.id }}/detail"><strong>{{ activity.name }}</strong></a></h3>
 
                                                         <div class="timeline-body">
                                                             {{ activity.content }}

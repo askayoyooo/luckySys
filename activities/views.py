@@ -9,3 +9,12 @@ def index(request):
 	if request.method == "GET":
 		print(activities)
 		return render(request, 'activities/index.html',{'activities': activities})
+
+
+def detail(request, activity_id):
+	print(activity_id)
+	return render(request,'activities/detail.html')
+
+
+def detail_edit(request, activity_id):
+	return render(request,'activities/detail_edit.html')
