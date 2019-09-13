@@ -45,8 +45,10 @@
             <!-- /.card-header -->
             <div class="card-body pad">
               <div class="mb-3">
-                <textarea class="textarea" placeholder="Place some text here"
-                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                  <div id="summernote">
+
+                  </div>
+                  <button id="submit" class="btn btn-info" >提交</button>
               </div>
             </div>
           </div>
@@ -63,7 +65,41 @@
 <script>
   $(function () {
     // Summernote
-    $('.textarea').summernote()
+    $('#summernote').summernote({
+        height:600,
+        callbacks: {
+            onImageUpload: function(files, editor, welEditable) {
+
+            console.log(123),
+            sendFile(files[0], editor, welEditable);
+            },
+        }
+        })
   })
+
+function sendFile(file,editor,welEditable) {
+    data = new FormData();
+    data.append("file", file);
+    data.append("csrfmiddlewaretoken",'{{ csrf_token  }}')
+    $.ajax({
+        data: data,
+        type: "POST",
+        url: "/activities/activity/{{ activity_id}}/upload",
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(url) {
+                console.log(welEditable,url)
+                //$this.summernote('insertImage','/activities/activity/{{ activity_id}}/upload', function ($image) {
+                  //                      });
+                editor.insertImage(welEditable, url);
+        }
+    });
+}
+
+
+
+
+
 </script>
 {% endblock script %}

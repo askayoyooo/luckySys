@@ -17,4 +17,11 @@ def detail(request, activity_id):
 
 
 def detail_edit(request, activity_id):
-	return render(request,'activities/detail_edit.html')
+	return render(request,'activities/detail_edit.html',{'activity_id':activity_id})
+
+
+def upload_image(request,activity_id):
+	if request.method =='POST':
+		print(request.FILES)
+
+	return HttpResponse('OK')
