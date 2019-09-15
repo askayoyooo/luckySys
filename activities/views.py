@@ -12,8 +12,9 @@ def index(request):
 
 
 def detail(request, activity_id):
+	activity = get_object_or_404(models.Activity, pk=activity_id )
 	print(activity_id)
-	return render(request,'activities/detail.html')
+	return render(request,'activities/detail.html', {'activity':activity})
 
 
 def detail_edit(request, activity_id):

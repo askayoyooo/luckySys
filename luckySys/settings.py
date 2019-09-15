@@ -126,4 +126,4 @@ STATICFILES_DIRS = (
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
-APPEND_SLASH = False
+# APPEND_SLASH = False
