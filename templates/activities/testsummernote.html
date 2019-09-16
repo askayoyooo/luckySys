@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../static/plugins/summernote/summernote-bs4.css">
+    <script src="../../static/plugins/summernote/summernote-bs4.min.js"></script>
+    <script src="../../static/plugins/jquery/jquery.min.js" ></script>
+</head>
+<body>
+
+
+<div class="col-sm-12" style="padding: 0;">
+    <div id="summernote">$!{anInfo.answer}</div>
+</div>
+<script type="text/javascript">
+$('#summernote').summernote({
+    height : '220px',
+    lang : 'zh-CN',
+       callbacks: {
+         onImageUpload: function(files,editor,$editable) {
+                 sendFile(this,files[0], editor,$editable);
+         }
+       }
+});
+
+//ajax上传图片
+function sendFile(obj,file, editor,$editable) {
+    var  filename=false;
+    try{
+        filename=file['name'];
+    }catch(e){
+        filename=false;
+    }
+    if(!filename){
+        $(".note-alarm").remove();
+    }
+    //防止重复提交
+    var formData = new FormData();
+    formData.append("file", file);
+    //formData.append("key",filename);//唯一参数性
+    $.ajax({
+        url: "$!{basePath}/fileUpload/uploadEditorImg.do",//路径是你控制器中上传图片的方法
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        type: 'POST',
+        success: function (data) {
+            debugger;
+            $(obj).summernote('insertImage', data.path);
+        }
+    });
+}
+</script>
+
+
+</body>
+</html>

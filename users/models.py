@@ -37,6 +37,7 @@ class Activity(models.Model):
 	creator = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 	time = models.DateField(blank=True, null=True)
 	update_time = models.DateTimeField(auto_now_add=True, blank=True)
+	views = models.IntegerField(default=0)
 
 	def __str__(self):
 		return self.name
