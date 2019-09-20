@@ -55,10 +55,10 @@
                                                             <a href="/activities/activity/{{ activity.id }}/detail"><strong>{{ activity.name }}</strong></a></h3>
 
                                                         <div class="timeline-body">
-                                                            {{ activity.content }}
+                                                            {{ activity.content| safe }}
                                                         </div>
                                                         <div class="timeline-footer">
-                                                            <a href="#" class="btn btn-primary btn-sm">Detail</a>
+                                                            <a href="/activities/activity/{{ activity.id }}/detail" class="btn btn-primary btn-sm">Detail</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -111,13 +111,7 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        <div class="float-right d-none d-sm-block">
-            <b>Version</b> 1.0
-        </div>
-        <strong>Copyright &copy; 2019 <a href="#">WZS QT</a>.</strong> All rights
-        reserved.
-    </footer>
+
 
     <!-- Control Sidebar -->
     <!--

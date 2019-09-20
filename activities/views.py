@@ -57,3 +57,16 @@ def upload_image(request):
 			res = {}
 
 		return JsonResponse(res)
+
+
+def detail_add(request):
+	if request.method == 'GET':
+		return render(request,'activities/detail_add.html')
+	elif request.method == 'POST':
+		name = request.POST['title']
+		content = request.POST['content']
+		time = request.POST['time']
+		creator = User.objects.get(pk=request.POST['creator'])
+		activity = models.Activity.objects.create(name=name,content=content, time=time, creator=creator)
+
+		return render(request, 'activities/detail_edit.html', {'activity': activity})
