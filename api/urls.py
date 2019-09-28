@@ -26,7 +26,9 @@ urlpatterns = [
 
     # path('profile/', views.profile, name='profile'),
 
-    path('settings/switch', views.switch, name='register'),
+    path('settings/switch', views.switch, name='switch'),
+    path('icons/find', views.find, name='find'),
+
     # path('login/', views.login, name='login',),
     # path('logout/', views.logout, name='logout'),
     # path('user/<int:user_id>/profile/', views.profile, name='profile'),
