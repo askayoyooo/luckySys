@@ -24,7 +24,8 @@ urlpatterns = [
     path('activity/<int:activity_id>/detail/', views.detail, name='detail'),
     path('activity/<int:activity_id>/detail/edit', views.detail_edit, name='detail'),
     path('activity/add', views.detail_add, name='add'),
-    path('activity/upload', views.upload_image, name='upload')
+    path('activity/upload', views.upload_image, name='upload'),
+    path('activity/test', views.test, name='test'),
     # path('profile/', views.profile, name='profile'),
     #
     # path('register/', views.register, name='register'),

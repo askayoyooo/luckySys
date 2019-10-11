@@ -70,3 +70,7 @@ def detail_add(request):
 		activity = models.Activity.objects.create(name=name,content=content, time=time, creator=creator)
 
 		return render(request, 'activities/detail_edit.html', {'activity': activity})
+
+
+def test(request):
+	return render(request, 'activities/test.html')
